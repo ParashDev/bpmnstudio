@@ -1,0 +1,465 @@
+/* Shared stylesheet for the static content pages. Same tokens as the app. */
+
+/* Light always — matching the app's default so navigation feels seamless. */
+:root {
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --surface-2: #f5f5f6;
+  --border: #e9e9ec;
+  --border-strong: #d6d6da;
+  --text: #18181b;
+  --text-secondary: #52525b;
+  --text-muted: #8e8e96;
+  --accent: #0d9488;
+  --accent-hover: #0b7d73;
+  --accent-soft: #e7f5f3;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 15.5px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ------------------------------ header ------------------------------ */
+
+/* Solid background on purpose: backdrop-filter would become the containing
+   block for the fixed-position mobile drawer and break its geometry. */
+.page-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+}
+
+.page-header .inner {
+  max-width: 72rem;
+  margin: 0 auto;
+  min-height: 60px;
+  padding: 10px max(1.5rem, env(safe-area-inset-left));
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .page-header .inner {
+    flex-wrap: nowrap;
+    height: 60px;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  color: var(--text);
+  text-decoration: none;
+  font-size: 15px;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.brand:hover {
+  text-decoration: none;
+}
+
+.brand svg {
+  display: block;
+}
+
+/* Mobile navigation: <details>/<summary> hamburger — no form controls. */
+.nav-details {
+  margin-left: auto;
+}
+
+.nav-details summary {
+  list-style: none;
+}
+
+.nav-details summary::-webkit-details-marker {
+  display: none;
+}
+
+.nav-burger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  background: var(--surface);
+}
+
+.nav-burger .icon-close {
+  display: none;
+}
+
+.nav-details[open] .nav-burger {
+  position: relative;
+  z-index: 62;
+}
+
+.nav-details[open] .nav-burger .icon-open {
+  display: none;
+}
+
+.nav-details[open] .nav-burger .icon-close {
+  display: block;
+}
+
+.nav-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: rgba(24, 24, 27, 0.35);
+  animation: backdrop-in 160ms ease both;
+}
+
+@keyframes backdrop-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes drawer-in {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: none;
+  }
+}
+
+.nav-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 61;
+  display: flex;
+  flex-direction: column;
+  width: min(80vw, 320px);
+  padding: 76px 20px calc(20px + env(safe-area-inset-bottom));
+  background: var(--surface);
+  border-left: 1px solid var(--border);
+  box-shadow: 0 2px 6px rgba(24, 24, 27, 0.07), 0 12px 32px rgba(24, 24, 27, 0.18);
+  animation: drawer-in 240ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.nav-drawer a {
+  color: var(--text);
+  text-decoration: none;
+  padding: 13px 16px;
+  margin: 4px 0;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 17px;
+  font-weight: 500;
+  transition: background 120ms ease, color 120ms ease;
+}
+
+.nav-drawer a:hover,
+.nav-drawer a:active {
+  text-decoration: none;
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.nav-drawer a.active {
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* Desktop nav: inline row, hidden on mobile. */
+.page-nav {
+  display: none;
+  align-items: center;
+  gap: 1.75rem;
+  font-size: 13px;
+}
+
+.page-nav a {
+  color: var(--text-secondary);
+  text-decoration: none;
+}
+
+.page-nav a:hover {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.page-nav a.active {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+@media (min-width: 768px) {
+  .page-nav {
+    display: flex;
+  }
+
+  .nav-details {
+    display: none;
+  }
+}
+
+/* ------------------------------ article ------------------------------ */
+
+main {
+  max-width: 47rem;
+  margin: 0 auto;
+  padding: 0 max(1.5rem, env(safe-area-inset-left)) 5rem;
+}
+
+/* Page hero: eyebrow + title + lede, separated from the body */
+.eyebrow {
+  margin: 4rem 0 0.9rem;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+h1 {
+  font-size: clamp(1.75rem, 4vw, 2.3rem);
+  font-weight: 600;
+  letter-spacing: -0.022em;
+  color: var(--text);
+  line-height: 1.15;
+  margin: 0 0 1rem;
+}
+
+.lede {
+  font-size: 1.1rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  margin-bottom: 2.5rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.012em;
+  color: var(--text);
+  margin: 3rem 0 0.9rem;
+}
+
+h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+  margin: 1.75rem 0 0.5rem;
+}
+
+p {
+  margin: 0 0 1.05rem;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+ul,
+ol {
+  padding-left: 1.4rem;
+  margin: 0 0 1.05rem;
+}
+
+li {
+  margin: 0.45rem 0;
+}
+
+code {
+  font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+  font-size: 0.88em;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 1px 6px;
+  color: var(--text);
+}
+
+/* ------------------------------ symbol cards ------------------------------ */
+
+.symbol-row {
+  display: flex;
+  gap: 1.4rem;
+  align-items: center;
+  padding: 1.1rem 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+  margin: 0 0 0.75rem;
+  transition: border-color 140ms ease, box-shadow 140ms ease;
+}
+
+.symbol-row:hover {
+  border-color: var(--border-strong);
+  box-shadow: 0 1px 2px rgba(24, 24, 27, 0.05), 0 4px 12px rgba(24, 24, 27, 0.05);
+}
+
+.symbol-row svg {
+  flex-shrink: 0;
+  width: 92px;
+  height: 68px;
+  color: var(--text);
+  background: radial-gradient(circle, rgba(24, 24, 27, 0.08) 1px, transparent 1px);
+  background-size: 12px 12px;
+  border-radius: 8px;
+  padding: 4px;
+}
+
+.symbol-row h3 {
+  margin: 0 0 0.3rem;
+  font-size: 0.95rem;
+}
+
+.symbol-row p {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.6;
+}
+
+/* "Open in editor" buttons on the examples page */
+.open-tpl {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 2px 0 1.75rem;
+  padding: 8px 16px;
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: border-color 120ms ease, background 120ms ease;
+}
+
+.open-tpl::after {
+  content: "\2192";
+  font-weight: 400;
+}
+
+.open-tpl:hover {
+  text-decoration: none;
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+/* ------------------------------ tables ------------------------------ */
+
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 14px;
+  margin: 0 0 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+th {
+  color: var(--text);
+  font-weight: 600;
+  background: var(--surface-2);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* ------------------------------ figures ------------------------------ */
+
+figure.diagram {
+  margin: 1.25rem 0;
+  padding: 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow-x: auto;
+}
+
+figure.diagram svg {
+  display: block;
+  margin: 0 auto;
+  color: var(--text);
+  max-width: 100%;
+}
+
+figure.diagram figcaption {
+  margin-top: 0.6rem;
+  font-size: 13px;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* ------------------------------ footer ------------------------------ */
+
+.page-footer {
+  border-top: 1px solid var(--border);
+  padding: 2rem 1.5rem;
+  max-width: 72rem;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  font-size: 12.5px;
+  color: var(--text-muted);
+}
+
+.page-footer a {
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.page-footer a:hover {
+  color: var(--text);
+}

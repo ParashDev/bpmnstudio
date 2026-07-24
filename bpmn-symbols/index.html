@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>BPMN Symbols — Complete Reference with Examples</title>
+    <meta
+      name="description"
+      content="Every BPMN 2.0 symbol explained: events, tasks, gateways, pools, lanes, data objects, and flows — with rendered examples and when to use each."
+    />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://bpmnstudio.dplooy.com/bpmn-symbols/" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="BPMN Symbols — Complete Reference with Examples" />
+    <meta
+      property="og:description"
+      content="Every BPMN 2.0 symbol explained with examples: events, tasks, gateways, pools, lanes, data, and flows."
+    />
+    <meta property="og:url" content="https://bpmnstudio.dplooy.com/bpmn-symbols/" />
+    <meta property="og:image" content="https://bpmnstudio.dplooy.com/og.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/src/seo/pages.css" />
+  </head>
+  <body>
+    <header class="page-header">
+      <div class="inner">
+        <a class="brand" href="/">
+          <svg width="22" height="22" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="#0d9488"/><circle cx="9" cy="16" r="3.4" fill="none" stroke="#fff" stroke-width="1.8"/><path d="M 12.4 16 L 16.4 16" stroke="#fff" stroke-width="1.8"/><path d="M 21.5 10.8 L 26 16 L 21.5 21.2 L 17 16 Z" fill="none" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"/></svg>
+          BPMN Studio
+        </a>
+        <nav class="page-nav" aria-label="Guides">
+          <a href="/bpmn-symbols/" class="active">Symbols</a>
+          <a href="/bpmn-tutorial/">Tutorial</a>
+          <a href="/bpmn-vs-flowchart/">BPMN vs flowchart</a>
+          <a href="/bpmn-examples/">Examples</a>
+          <a href="/how-it-works/">How it works</a>
+        </nav>
+        <details class="nav-details">
+          <summary class="nav-burger" aria-label="Toggle navigation menu">
+            <svg class="icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+            <svg class="icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+          </summary>
+          <div class="nav-backdrop" aria-hidden="true"></div>
+          <nav class="nav-drawer" aria-label="Guides">
+            <a href="/bpmn-symbols/" class="active">Symbols</a>
+            <a href="/bpmn-tutorial/">Tutorial</a>
+            <a href="/bpmn-vs-flowchart/">BPMN vs flowchart</a>
+            <a href="/bpmn-examples/">Examples</a>
+            <a href="/how-it-works/">How it works</a>
+          </nav>
+        </details>
+        <a class="open-editor" href="/">Open editor</a>
+      </div>
+    </header>
+
+    <main>
+      <p class="eyebrow">Reference</p>
+      <h1>BPMN symbols — the complete reference</h1>
+      <p class="lede">
+        BPMN 2.0 defines a precise visual vocabulary. Every shape means something specific, and a
+        diagram that uses the right shapes can be read unambiguously by analysts, developers, and
+        workflow engines alike. This page covers the full symbol set, grouped the way you use it.
+        Try any of them in the <a href="/">free BPMN editor</a> — no signup, files stay on your
+        device.
+      </p>
+
+      <h2>Events — circles: something happens</h2>
+      <p>
+        Events mark points where something happens rather than something being done. The border
+        tells you the position: <strong>thin</strong> = start, <strong>double</strong> =
+        intermediate, <strong>thick</strong> = end. The icon inside tells you the trigger.
+      </p>
+
+      <div class="symbol-row">
+        <svg viewBox="0 0 84 64" aria-hidden="true"><circle cx="42" cy="32" r="16" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+        <div>
+          <h3>Start event</h3>
+          <p>Where the process begins. A plain (none) start means it is started manually or by a parent process. Every executable process needs one.</p>
+        </div>
+      </div>
+      <div class="symbol-row">
+        <svg viewBox="0 0 84 64" aria-hidden="true"><circle cx="42" cy="32" r="16" fill="none" stroke="currentColor" stroke-width="4"/></svg>
+        <div>
+          <h3>End event</h3>
+          <p>Where a path finishes. A process may have several — one per distinct outcome ("Approved", "Rejected") is good practice.</p>
+        </div>
+      </div>
+      <div class="symbol-row">
+        <svg viewBox="0 0 84 64" aria-hidden="true"><circle cx="42" cy="32" r="16" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="42" cy="32" r="12.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+        <div>
+          <h3>Intermediate event</h3>
+          <p>Something that happens mid-process: the process throws it (sends) or catches it (waits). The double border distinguishes it from start and end.</p>
+        </div>
+      </div>
+      <div class="symbol-row">
+        <svg viewBox="0 0 84 64" aria-hidden="true"><circle cx="42" cy="32" r="16" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="42" cy="32" r="11" fill="none" stroke="currentColor" stroke-width="1"/><line x1="42" y1="32" x2="42" y2="24" stroke="currentColor" stroke-width="1.5"/><line x1="42" y1="32" x2="48" y2="34" stroke="currentColor" stroke-width="1.5"/></svg>
+        <div>
+          <h3>Timer event</h3>
+          <p>A clock trigger: start a process every Monday, wait three days, or escalate when a deadline passes (as a boundary event on a task).</p>
+        </div>
+      </div>
+      <div class="symbol-row">
+        <svg viewBox="0 0 84 64" aria-hidden="true"><circle cx="42" cy="32" r="16" fill="none" stroke="currentColor" stroke-width="1.5"/><rect x="33" y="25.5" width="18" height="13" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M 33 26 L 42 33 L 51 26" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+        <div>
+          <h3>Message event</h3>
+          <p>Communication crossing a pool boundary: an order arrives, a confirmation is sent. Message start events are how most service processes begin.</p>
+        </div>
+      </div>
+      <div class="symbol-row">
+        <svg viewBox="0 0 84 64" aria-hidden="true"><circle cx="42" cy="32" r="16" fill="none" stroke="currentColor" stroke-width="4"/><path d="M 36 24 L 48 40 M 48 24 L 36 40" stroke="currentColor" stroke-width="3"/></svg>
+        <div>
+          <h3>Terminate end event</h3>
+          <p>Ends the entire process instantly, including parallel branches still running. A plain end event only finishes its own path.</p>
+        </div>
+      </div>
+      <div class="symbol-row">
+        <svg viewBox="0 0 84 64" aria-hidden="true"><rect x="14" y="14" width="42" height="32" rx="6" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="56" cy="46" r="12" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="56" cy="46" r="9" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+        <div>
+          <h3>Boundary event</h3>
+          <p>Attached to a task's edge: it watches for a timer, error, or message while the task runs. Interrupting (solid border) cancels the task; non-interrupting (dashed) runs alongside. Other triggers exist too: error, signal, escalation, conditional, and compensation.</p>
+        </div>
+      </div>
+
+      <h2>Activities — rounded rectangles: work being done</h2>
+      <div class="symbol-row">
+        <svg viewBox="0 0 84 64" aria-hidden="true"><rect x="10" y="12" width="64" height="40" rx="8" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+        <div>
+          <h3>Task</h3>
+          <p>A single unit of work. The generic form is fine for sketching; the typed variants below make responsibility explicit.</p>
+        </div>
+      </div>
+      <div class="symbol-row">
+        <svg viewBox="0 0 84 64" aria-hidden="true"><rect x="10" y="12" width="64" height="40" rx="8" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="21" cy="22" r="3.5" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M 15.5 31 C 15.5 26.5 26.5 26.5 26.5 31" fill="none" stroke="currentColor" stroke-width="1.3"/></svg>
+        <div>
+          <h3>User task</h3>
+          <p>A person performs the work through some interface: approve a request, review a document, enter data.</p>
+        </div>
+      </div>
+      <div class="symbol-row">
+        <svg viewBox="0 0 84 64" aria-hidden="true"><rect x="10" y="12" width="64" height="40" rx="8" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="21" cy="23" r="4" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M 21 16.5 v 2.5 M 21 27 v 2.5 M 14.5 23 h 2.5 M 25 23 h 2.5 M 16.4 18.4 l 1.8 1.8 M 23.8 25.8 l 1.8 1.8 M 25.6 18.4 l -1.8 1.8 M 18.2 25.8 l -1.8 1.8" stroke="currentColor" stroke-width="1.3"/></svg>
+        <div>
+          <h3>Service task</h3>
+          <p>A system does the work automatically: call an API, run a calculation, update a record. No human involved.</p>
+        </div>
+      </div>
+      <div class="symbol-row">
+        <svg viewBox="0 0 84 64" aria-hidden="true"><rect x="10" y="12" width="64" height="40" rx="8" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M 15 18 h 10 M 15 22 h 8 M 15 26 h 10" stroke="currentColor" stroke-width="1.3"/></svg>
+        <div>
+          <h3>Script, manual, send, receive, business rule tasks</h3>
+          <p>Further specializations: a script executed by the engine, work done physically outside any system, sending or awaiting a message, or evaluating a decision table. Use them when the distinction matters to your audience.</p>
+        </div>
+      </div>
+      <div class="symbol-row">
+        <svg viewBox="0 0 84 64" aria-hidden="true"><rect x="10" y="10" width="64" height="44" rx="8" fill="none" stroke="currentColor" stroke-width="1.5"/><rect x="36" y="44" width="12" height="10" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M 42 46 v 6 M 39 49 h 6" stroke="currentColor" stroke-width="1.3"/></svg>
+        <div>
+          <h3>Subprocess</h3>
+          <p>A process within a process. Collapsed (shown with the +) it keeps the parent readable; expanded it shows its internal steps. Event subprocesses handle events for their parent; call activities invoke a reusable process defined elsewhere; transactions group steps that must succeed or be compensated together.</p>
+        </div>
+      </div>
+
+      <h2>Gateways — diamonds: the flow splits or joins</h2>
+      <div class="symbol-row">
+        <svg viewBox="0 0 84 64" aria-hidden="true"><path d="M 42 8 L 66 32 L 42 56 L 18 32 Z" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M 35 25 L 49 39 M 49 25 L 35 39" stroke="currentColor" stroke-width="2.5"/></svg>
+        <div>
+          <h3>Exclusive gateway (XOR)</h3>
+          <p>Exactly one outgoing path is taken, decided by conditions. Every outgoing flow needs a condition or the gateway needs a default path — the editor's validation flags this, because it is the single most common BPMN mistake.</p>
+        </div>
+      </div>
+      <div class="symbol-row">
+        <svg viewBox="0 0 84 64" aria-hidden="true"><path d="M 42 8 L 66 32 L 42 56 L 18 32 Z" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M 42 20 v 24 M 30 32 h 24" stroke="currentColor" stroke-width="2.5"/></svg>
+        <div>
+          <h3>Parallel gateway (AND)</h3>
+          <p>All outgoing paths run at once; the matching join waits for all of them. Splits and joins should come in pairs — an unmatched split means branches never synchronize.</p>
+        </div>
+      </div>
+      <div class="symbol-row">
+        <svg viewBox="0 0 84 64" aria-hidden="true"><path d="M 42 8 L 66 32 L 42 56 L 18 32 Z" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="42" cy="32" r="9" fill="none" stroke="currentColor" stroke-width="2.5"/></svg>
+        <div>
+          <h3>Inclusive gateway (OR)</h3>
+          <p>Every path whose condition is true runs — one, some, or all. Useful for "notify everyone who applies" situations; harder to reason about than XOR and AND, so use sparingly.</p>
+        </div>
+      </div>
+      <div class="symbol-row">
+        <svg viewBox="0 0 84 64" aria-hidden="true"><path d="M 42 8 L 66 32 L 42 56 L 18 32 Z" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="42" cy="32" r="10" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M 42 25.5 L 48 30 L 45.7 37 L 38.3 37 L 36 30 Z" fill="none" stroke="currentColor" stroke-width="1.3"/></svg>
+        <div>
+          <h3>Event-based gateway</h3>
+          <p>The process waits and the first event that occurs picks the path: "whichever comes first — the reply or the three-day timeout." The complex gateway (asterisk) exists for merge behavior none of the others express; it is rarely needed.</p>
+        </div>
+      </div>
+
+      <h2>Pools, lanes, and flows</h2>
+      <div class="symbol-row">
+        <svg viewBox="0 0 84 64" aria-hidden="true"><rect x="8" y="10" width="68" height="44" fill="none" stroke="currentColor" stroke-width="1.5"/><line x1="18" y1="10" x2="18" y2="54" stroke="currentColor" stroke-width="1.5"/><line x1="18" y1="32" x2="76" y2="32" stroke="currentColor" stroke-width="1"/></svg>
+        <div>
+          <h3>Pool and lanes</h3>
+          <p>A pool is one participant — a company, a system, a customer. Lanes divide a pool by role or department. Sequence flows may not cross pool boundaries; that is what message flows are for. A collapsed "black box" pool hides internals you don't control.</p>
+        </div>
+      </div>
+      <div class="symbol-row">
+        <svg viewBox="0 0 84 64" aria-hidden="true"><line x1="10" y1="32" x2="64" y2="32" stroke="currentColor" stroke-width="1.5"/><path d="M 64 32 L 54 27 L 54 37 Z" fill="currentColor"/></svg>
+        <div>
+          <h3>Sequence flow</h3>
+          <p>The solid arrow: order of execution inside one pool. A diagonal slash marker makes it the default path out of a gateway.</p>
+        </div>
+      </div>
+      <div class="symbol-row">
+        <svg viewBox="0 0 84 64" aria-hidden="true"><line x1="12" y1="32" x2="62" y2="32" stroke="currentColor" stroke-width="1.5" stroke-dasharray="6 4"/><circle cx="10" cy="32" r="3" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M 62 27 L 72 32 L 62 37" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+        <div>
+          <h3>Message flow</h3>
+          <p>The dashed arrow with an open head: communication between pools. Inside a single pool it is invalid — the editor flags it.</p>
+        </div>
+      </div>
+      <div class="symbol-row">
+        <svg viewBox="0 0 84 64" aria-hidden="true"><path d="M 14 16 L 58 16 L 66 24 L 66 48 L 14 48 Z" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M 58 16 L 58 24 L 66 24" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+        <div>
+          <h3>Data object and data store</h3>
+          <p>The document shape is data flowing through the process (an invoice, an application); the cylinder is persistent storage the process reads or writes. Connected with dotted associations, they document inputs and outputs without affecting flow.</p>
+        </div>
+      </div>
+      <div class="symbol-row">
+        <svg viewBox="0 0 84 64" aria-hidden="true"><path d="M 26 14 L 14 14 L 14 50 L 26 50" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M 20 24 h 40 M 20 32 h 34 M 20 40 h 38" stroke="currentColor" stroke-width="1" opacity="0.5"/></svg>
+        <div>
+          <h3>Text annotation and group</h3>
+          <p>The open bracket holds free-text notes; the rounded dashed rectangle groups related elements visually. Neither affects execution — they exist for readers.</p>
+        </div>
+      </div>
+
+      <h2>Markers on activities</h2>
+      <table>
+        <tr><th>Marker</th><th>Meaning</th></tr>
+        <tr><td>Circular arrow</td><td>Standard loop — the task repeats while a condition holds.</td></tr>
+        <tr><td>Three vertical bars</td><td>Multi-instance parallel — one instance per item, all at once (e.g. one approval per reviewer).</td></tr>
+        <tr><td>Three horizontal bars</td><td>Multi-instance sequential — one instance per item, one after another.</td></tr>
+        <tr><td>Rewind symbol</td><td>Compensation — the activity undoes completed work when a transaction is cancelled.</td></tr>
+        <tr><td>Tilde (~)</td><td>Ad-hoc subprocess — contained tasks run in any order, at the performers' discretion.</td></tr>
+      </table>
+
+      <p>
+        The fastest way to learn the vocabulary is to use it:
+        <a href="/">open the editor</a> and drop these shapes onto the canvas, or start from the
+        <a href="/bpmn-examples/">example processes</a>. New to BPMN entirely? Start with the
+        <a href="/bpmn-tutorial/">tutorial</a>.
+      </p>
+    </main>
+
+    <footer class="page-footer">
+      <span><a href="/">BPMN Studio</a> — free, local-first, BPMN 2.0. Files never leave your device.</span>
+      <a href="https://www.dplooy.com">Dplooy</a>
+    </footer>
+  </body>
+</html>

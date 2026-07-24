@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>How It Works — Local-First BPMN Editing</title>
+    <meta
+      name="description"
+      content="BPMN Studio has no backend: how file access, autosave, share links, validation, and offline mode work when everything runs in your browser."
+    />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://bpmnstudio.dplooy.com/how-it-works/" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="How It Works — Local-First BPMN Editing" />
+    <meta
+      property="og:description"
+      content="No backend, no accounts, no telemetry: the architecture of a fully local BPMN editor."
+    />
+    <meta property="og:url" content="https://bpmnstudio.dplooy.com/how-it-works/" />
+    <meta property="og:image" content="https://bpmnstudio.dplooy.com/og.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/src/seo/pages.css" />
+  </head>
+  <body>
+    <header class="page-header">
+      <div class="inner">
+        <a class="brand" href="/">
+          <svg width="22" height="22" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="#0d9488"/><circle cx="9" cy="16" r="3.4" fill="none" stroke="#fff" stroke-width="1.8"/><path d="M 12.4 16 L 16.4 16" stroke="#fff" stroke-width="1.8"/><path d="M 21.5 10.8 L 26 16 L 21.5 21.2 L 17 16 Z" fill="none" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"/></svg>
+          BPMN Studio
+        </a>
+        <nav class="page-nav" aria-label="Guides">
+          <a href="/bpmn-symbols/">Symbols</a>
+          <a href="/bpmn-tutorial/">Tutorial</a>
+          <a href="/bpmn-vs-flowchart/">BPMN vs flowchart</a>
+          <a href="/bpmn-examples/">Examples</a>
+          <a href="/how-it-works/" class="active">How it works</a>
+        </nav>
+        <details class="nav-details">
+          <summary class="nav-burger" aria-label="Toggle navigation menu">
+            <svg class="icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+            <svg class="icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+          </summary>
+          <div class="nav-backdrop" aria-hidden="true"></div>
+          <nav class="nav-drawer" aria-label="Guides">
+            <a href="/bpmn-symbols/">Symbols</a>
+            <a href="/bpmn-tutorial/">Tutorial</a>
+            <a href="/bpmn-vs-flowchart/">BPMN vs flowchart</a>
+            <a href="/bpmn-examples/">Examples</a>
+            <a href="/how-it-works/" class="active">How it works</a>
+          </nav>
+        </details>
+        <a class="open-editor" href="/">Open editor</a>
+      </div>
+    </header>
+
+    <main>
+      <p class="eyebrow">Architecture</p>
+      <h1>How it works — the local-first architecture, honestly</h1>
+      <p class="lede">
+        BPMN Studio is a static bundle of HTML, JavaScript, and CSS. Once it loads, there is
+        nothing left to talk to: no backend, no database, no accounts, no analytics, no
+        third-party scripts. This page explains how each feature works under that constraint —
+        and what the trade-offs are.
+      </p>
+
+      <h2>Your files</h2>
+      <p>
+        In Chromium browsers (Chrome, Edge, Brave, Arc) the editor uses the File System Access
+        API: when you open a <code>.bpmn</code> file it keeps a handle to it, and
+        <code>Ctrl+S</code> writes straight back to that file, like a desktop app. The handle
+        lives in your browser only; the permission is one you grant and can revoke. In Firefox
+        and Safari, which don't ship that API, opening uses a standard file picker and saving
+        downloads a new copy — the editor says so explicitly rather than pretending it overwrote
+        the original.
+      </p>
+
+      <h2>Autosave and recents</h2>
+      <p>
+        While you edit, the diagram is written to IndexedDB — the browser's local database —
+        about two seconds after each change. If the tab crashes or you close it accidentally,
+        the next visit offers to restore that copy. Recents (name, preview, timestamp) live in
+        the same database. All of it is inspectable in your browser's developer tools, and a
+        single <em>Clear local data</em> action in the Tools menu removes everything. In private
+        browsing, where IndexedDB may be unavailable, the editor tells you autosave is off and
+        continues working.
+      </p>
+
+      <h2>Share links with no server</h2>
+      <p>
+        The share feature compresses the entire diagram XML (deflate), encodes it as URL-safe
+        base64, and puts it after the <code>#</code> in the link. Browsers never send the
+        fragment to any server — it exists only in the address bar and in whatever chat message
+        you paste it into. The recipient's browser decompresses it locally and shows a read-only
+        view with an explicit "edit a copy" action. The honest limitation: URLs have practical
+        length limits, so a diagram that compresses beyond ~30,000 characters can't be shared
+        this way — the editor blocks it and says to send the file instead.
+      </p>
+
+      <h2>Validation</h2>
+      <p>
+        The rules engine parses the BPMN XML in a Web Worker — off the main thread, so a large
+        diagram doesn't freeze the canvas — and runs structural checks: connectivity,
+        gateway conditions, parallel split/join matching, pool boundary discipline, reachability
+        from start events, loops with no exit, duplicate ids, lane assignment, and naming. The
+        findings are written in plain language, with the consequence stated, because "gateway
+        G_17 violates §10.5.3" helps nobody.
+      </p>
+
+      <h2>Offline</h2>
+      <p>
+        A service worker caches the application shell after your first visit. From then on the
+        editor loads and works with no network at all — on a plane, behind an airgap, wherever.
+        Combined with local files, this means the entire toolchain functions without
+        connectivity.
+      </p>
+
+      <h2>What this architecture costs</h2>
+      <p>
+        Honesty requires the other column. There is no cross-device sync — your files are where
+        you put them. There is no real-time collaboration: share links are snapshots, not live
+        sessions. Autosave lives in one browser profile on one machine. If those trade-offs are
+        wrong for your team, a hosted tool is the right answer; if what you want is a serious
+        modeler where the data provably never leaves your control, this is that.
+      </p>
+
+      <h2>Verifying the claims</h2>
+      <p>
+        You don't have to take any of this on trust. Open your browser's network inspector,
+        load the editor, then open and edit a diagram: after the static assets, there are no
+        requests. The BPMN rendering is <a href="https://bpmn.io">bpmn-js</a>, the
+        battle-tested open-source engine behind Camunda Modeler, under Apache 2.0.
+      </p>
+
+      <p>
+        Ready? <a href="/">Open the editor</a> — or start with a
+        <a href="/bpmn-examples/">worked example</a>.
+      </p>
+    </main>
+
+    <footer class="page-footer">
+      <span><a href="/">BPMN Studio</a> — free, local-first, BPMN 2.0. Files never leave your device.</span>
+      <a href="https://www.dplooy.com">Dplooy</a>
+    </footer>
+  </body>
+</html>

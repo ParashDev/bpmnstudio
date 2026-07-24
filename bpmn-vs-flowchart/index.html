@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>BPMN vs. Flowchart — When Notation Matters</title>
+    <meta
+      name="description"
+      content="Flowcharts and BPMN both draw boxes and arrows. Here is what BPMN adds — semantics, roles, events, exceptions — and when a plain flowchart is enough."
+    />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://bpmnstudio.dplooy.com/bpmn-vs-flowchart/" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="BPMN vs. Flowchart — When Notation Matters" />
+    <meta
+      property="og:description"
+      content="What BPMN adds over a plain flowchart — semantics, roles, events, exceptions — and when a flowchart is enough."
+    />
+    <meta property="og:url" content="https://bpmnstudio.dplooy.com/bpmn-vs-flowchart/" />
+    <meta property="og:image" content="https://bpmnstudio.dplooy.com/og.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/src/seo/pages.css" />
+  </head>
+  <body>
+    <header class="page-header">
+      <div class="inner">
+        <a class="brand" href="/">
+          <svg width="22" height="22" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="#0d9488"/><circle cx="9" cy="16" r="3.4" fill="none" stroke="#fff" stroke-width="1.8"/><path d="M 12.4 16 L 16.4 16" stroke="#fff" stroke-width="1.8"/><path d="M 21.5 10.8 L 26 16 L 21.5 21.2 L 17 16 Z" fill="none" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"/></svg>
+          BPMN Studio
+        </a>
+        <nav class="page-nav" aria-label="Guides">
+          <a href="/bpmn-symbols/">Symbols</a>
+          <a href="/bpmn-tutorial/">Tutorial</a>
+          <a href="/bpmn-vs-flowchart/" class="active">BPMN vs flowchart</a>
+          <a href="/bpmn-examples/">Examples</a>
+          <a href="/how-it-works/">How it works</a>
+        </nav>
+        <details class="nav-details">
+          <summary class="nav-burger" aria-label="Toggle navigation menu">
+            <svg class="icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+            <svg class="icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+          </summary>
+          <div class="nav-backdrop" aria-hidden="true"></div>
+          <nav class="nav-drawer" aria-label="Guides">
+            <a href="/bpmn-symbols/">Symbols</a>
+            <a href="/bpmn-tutorial/">Tutorial</a>
+            <a href="/bpmn-vs-flowchart/" class="active">BPMN vs flowchart</a>
+            <a href="/bpmn-examples/">Examples</a>
+            <a href="/how-it-works/">How it works</a>
+          </nav>
+        </details>
+        <a class="open-editor" href="/">Open editor</a>
+      </div>
+    </header>
+
+    <main>
+      <p class="eyebrow">Comparison</p>
+      <h1>BPMN vs. flowchart — when notation matters</h1>
+      <p class="lede">
+        Both are boxes and arrows. The difference is that a flowchart means whatever its author
+        intended, while a BPMN diagram means what the specification says. That single property
+        changes who can use the diagram and for what.
+      </p>
+
+      <h2>What a flowchart can't say</h2>
+      <p>
+        Draw "wait three days, then escalate" in a flowchart and you get a box labeled
+        <em>Wait 3 days</em>. Nothing distinguishes it from a box of work; nothing says what
+        happens to the waiting if the reply arrives on day two. In BPMN this is a timer boundary
+        event on a task — a precise construct that says: while this task runs, a clock is armed;
+        if it fires first, take this other path and (if interrupting) cancel the task. Everyone
+        who reads BPMN reads that identically, and a workflow engine can execute it.
+      </p>
+      <p>The gaps show up in predictable places:</p>
+      <ul>
+        <li>
+          <strong>Who does what.</strong> Flowcharts have no standard for responsibility. BPMN
+          pools and lanes carry it structurally, and every lane crossing is a visible handoff —
+          which is where processes actually fail.
+        </li>
+        <li>
+          <strong>Waiting vs. working.</strong> BPMN events distinguish "something happens" from
+          "someone does something." Most real processes spend most of their life waiting; a
+          notation that can't express waiting hides the dominant cost.
+        </li>
+        <li>
+          <strong>Exceptions.</strong> A flowchart's happy path degenerates into arrow spaghetti
+          the moment you add timeouts, errors, and cancellations. BPMN attaches those to the
+          places they occur — boundary events, event subprocesses — keeping the main flow clean.
+        </li>
+        <li>
+          <strong>Parallelism done right.</strong> A diamond that splits "and also" paths in a
+          flowchart is ambiguous: do both run? must both finish? BPMN's exclusive, parallel, and
+          inclusive gateways answer precisely, and validation can catch a parallel split merged
+          by an exclusive join — a real defect that flowcharts cannot even express.
+        </li>
+        <li>
+          <strong>A file format.</strong> BPMN 2.0 is XML with a standardized schema. Your diagram
+          opens in <a href="/">this editor</a>, in Camunda, in Signavio; it can be diffed,
+          validated, and executed. A flowchart is a picture.
+        </li>
+      </ul>
+
+      <h2>When a flowchart is the right choice</h2>
+      <p>
+        Honest answer: often. A five-box sketch of an idea on a whiteboard, a one-off explainer
+        slide for an audience that will never see it again, an algorithm's control flow inside a
+        single system — none of these need pools, events, or a schema. Notation has a reading
+        cost, and BPMN's is only worth paying when the diagram will be <em>used</em>: handed
+        across teams, kept current, analyzed, or automated.
+      </p>
+
+      <h2>The practical rule</h2>
+      <table>
+        <tr><th>Situation</th><th>Use</th></tr>
+        <tr><td>Sketching an idea for yourself</td><td>Anything — paper wins</td></tr>
+        <tr><td>Explaining an algorithm inside one system</td><td>Flowchart</td></tr>
+        <tr><td>Documenting a business process with multiple roles</td><td>BPMN</td></tr>
+        <tr><td>Specifying behavior a team must build or follow</td><td>BPMN</td></tr>
+        <tr><td>Anything with deadlines, escalations, or messages between parties</td><td>BPMN</td></tr>
+        <tr><td>Anything a workflow engine might one day execute</td><td>BPMN, from day one</td></tr>
+      </table>
+
+      <p>
+        The switching cost is lower than it looks: the core vocabulary is about a dozen shapes
+        (<a href="/bpmn-symbols/">reference here</a>), and the
+        <a href="/bpmn-tutorial/">tutorial</a> gets you to a correct diagram in one sitting — in a
+        <a href="/">free editor</a> that validates as you draw.
+      </p>
+    </main>
+
+    <footer class="page-footer">
+      <span><a href="/">BPMN Studio</a> — free, local-first, BPMN 2.0. Files never leave your device.</span>
+      <a href="https://www.dplooy.com">Dplooy</a>
+    </footer>
+  </body>
+</html>

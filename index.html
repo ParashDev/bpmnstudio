@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>BPMN Studio — Free Online BPMN 2.0 Editor</title>
+    <meta
+      name="description"
+      content="Free browser-based BPMN 2.0 editor. No signup, no uploads — diagrams stay on your device. Import, validate, and export BPMN, SVG, and PNG."
+    />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://bpmnstudio.dplooy.com/" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fafafa" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#141518" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="BPMN Studio" />
+    <meta property="og:title" content="BPMN Studio — Free Online BPMN 2.0 Editor" />
+    <meta
+      property="og:description"
+      content="Free browser-based BPMN 2.0 editor. No signup, no uploads — diagrams stay on your device. Import, validate, and export BPMN, SVG, and PNG."
+    />
+    <meta property="og:url" content="https://bpmnstudio.dplooy.com/" />
+    <meta property="og:image" content="https://bpmnstudio.dplooy.com/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="BPMN Studio — Free Online BPMN 2.0 Editor" />
+    <meta
+      name="twitter:description"
+      content="Free browser-based BPMN 2.0 editor. No signup, no uploads — diagrams stay on your device."
+    />
+    <meta name="twitter:image" content="https://bpmnstudio.dplooy.com/og.png" />
+
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+
+    <style>
+      /* Inlined so it applies at parse time, before the app bundle loads:
+         the crawlable block is hidden the instant JS marks the body, with no
+         flash. Crawlers without JS never get the attribute and see content. */
+      body[data-view] #seo-content {
+        display: none;
+      }
+      html {
+        background: #ffffff;
+      }
+      html[data-theme="dark"] {
+        background: #141518;
+      }
+    </style>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "BPMN Studio",
+        "description": "Free browser-based BPMN 2.0 editor with validation, templates, and export to BPMN, SVG, and PNG. Files never leave your device.",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Any",
+        "url": "https://bpmnstudio.dplooy.com/",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Is BPMN Studio free?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Every feature is free. There is no paid tier, no trial period, and no feature gate."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do I need an account or signup?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. The editor opens directly in your browser. There are no accounts, no login, and no email capture."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Are my files uploaded anywhere?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. There is no server. Diagrams are opened from and saved to your own disk, and autosave uses your browser's local storage. Nothing is transmitted."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I open Camunda files?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Files exported from Camunda Modeler, Zeebe, Signavio, Bizagi, and other BPMN 2.0 tools open normally. Vendor extension attributes are preserved when you save."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does it export to PNG?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Export to PNG at 1x, 2x, or 3x resolution with a transparent or solid background, plus SVG and formatted BPMN 2.0 XML."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does it work offline?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. After your first visit the app is cached and works without a network connection, including on a plane."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I use it on my phone?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Phones get a full-featured viewer: open diagrams, inspect elements, run validation, and export. Editing needs a larger screen because BPMN modeling depends on precise drag-and-drop."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is it BPMN 2.0 compliant?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. It reads and writes standard BPMN 2.0 XML including diagram interchange, and supports the full element set: events, activities, gateways, pools, lanes, data objects, and artifacts."
+            }
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <script>
+      // Runs at parse time: hides the crawlable content until the app decides
+      // the view, and applies a stored dark-theme choice before first paint.
+      // Crawlers without JS never set the attribute, so the content stays visible.
+      document.body.dataset.view = "boot";
+      try {
+        if (localStorage.getItem("bpmn-modeler:theme:v2") === "dark") {
+          document.documentElement.dataset.theme = "dark";
+        }
+      } catch (e) {}
+    </script>
+    <div id="root"></div>
+
+    <main id="seo-content" class="seo-content">
+      <section>
+        <h1>BPMN Studio — a free BPMN 2.0 editor that runs in your browser</h1>
+        <p>
+          BPMN Studio is a complete Business Process Model and Notation 2.0 editor that runs
+          entirely in your browser. There is no signup, no upload, and no server: diagrams are
+          opened from your own disk and saved back to it, and everything — the canvas, the
+          properties panel, validation, and export — executes locally. Close the tab and nothing
+          about your process leaves your machine.
+        </p>
+        <p>
+          It is built on the same open-source rendering engine used by Camunda Modeler, so
+          diagrams look and behave the way professional process tooling expects: proper connection
+          routing, snapping, undo history, and faithful BPMN 2.0 XML on the way in and out.
+        </p>
+      </section>
+
+      <section>
+        <h2>What is BPMN 2.0?</h2>
+        <p>
+          BPMN — Business Process Model and Notation — is the ISO-standardized language for
+          describing business processes. Unlike a freeform flowchart, every shape in BPMN has a
+          defined meaning. <strong>Events</strong> (circles) mark things that happen: a process
+          starting, a timer expiring, a message arriving, an error being thrown.
+          <strong>Activities</strong> (rounded rectangles) are work being done — by a person, a
+          system, or a business rule. <strong>Gateways</strong> (diamonds) control how the flow
+          splits and joins: exclusive gateways choose one path, parallel gateways take all paths at
+          once, inclusive gateways take every path whose condition holds.
+          <strong>Pools and lanes</strong> show who is responsible for each step, and
+          <strong>message flows</strong> show communication crossing organizational boundaries.
+        </p>
+        <p>
+          Because the notation is standardized, a BPMN diagram is portable: the same file opens in
+          this editor, in Camunda, in Signavio, or in a workflow engine that executes it directly.
+          See the <a href="/bpmn-symbols/">complete symbol reference</a> for every element with
+          examples, or the <a href="/bpmn-tutorial/">tutorial</a> to model your first process.
+        </p>
+      </section>
+
+      <section>
+        <h2>Validation that understands BPMN, not just shapes</h2>
+        <p>
+          Generic diagram tools let you draw anything, including processes that could never run: a
+          gateway that splits but never joins, a sequence flow that crosses a pool boundary, an
+          exclusive gateway whose outgoing paths have no conditions and no default. BPMN Studio
+          checks your diagram continuously against dozens of structural rules and explains each
+          finding in plain language — what is wrong, why it matters, and which element to fix.
+          Click a finding and the canvas centers on the problem. Validation never blocks saving;
+          it informs, it does not gatekeep.
+        </p>
+      </section>
+
+      <section>
+        <h2>Your files stay yours</h2>
+        <p>
+          The application is a static bundle of HTML, JavaScript, and CSS. It has no backend, no
+          analytics, no telemetry, and no third-party scripts. Files are read with your browser's
+          own file APIs, autosave lives in your browser's local database, and the optional share
+          link encodes the entire diagram into the URL fragment — the part after the #, which
+          browsers never send to any server. You can verify all of this in your browser's network
+          inspector: after the app loads, no requests are made. Read
+          <a href="/how-it-works/">how it works</a> for the full architecture.
+        </p>
+      </section>
+
+      <section>
+        <h2>Frequently asked questions</h2>
+        <dl>
+          <dt>Is it free?</dt>
+          <dd>
+            Yes, completely. Every feature is available to everyone. No paid tier, no trial, no
+            feature gates, no ads.
+          </dd>
+          <dt>Is there a signup?</dt>
+          <dd>No. There are no accounts. Open the page and start modeling.</dd>
+          <dt>Are my files uploaded anywhere?</dt>
+          <dd>
+            No. There is no server to upload to. Diagrams stay on your device — on your disk and
+            in your browser's local storage for autosave, which you can clear at any time.
+          </dd>
+          <dt>Can I open Camunda files?</dt>
+          <dd>
+            Yes. BPMN 2.0 files from Camunda Modeler, Zeebe, Signavio, Bizagi, ARIS, and other
+            tools open normally, and their vendor-specific attributes are preserved when you save.
+          </dd>
+          <dt>Does it export to PNG?</dt>
+          <dd>
+            Yes — PNG at 1x, 2x, or 3x with transparent or solid background, plus SVG and clean,
+            formatted BPMN 2.0 XML.
+          </dd>
+          <dt>Does it work offline?</dt>
+          <dd>
+            Yes. After the first visit the app shell is cached locally and the editor works with no
+            connection at all.
+          </dd>
+          <dt>Can I use it on my phone?</dt>
+          <dd>
+            Phones get a viewer: open, inspect, validate, and export diagrams. Editing requires a
+            larger screen, because accurate BPMN modeling depends on precise pointer input.
+          </dd>
+          <dt>Is it BPMN 2.0 compliant?</dt>
+          <dd>
+            Yes. It reads and writes standard BPMN 2.0 XML with diagram interchange, covering the
+            full element set of the specification.
+          </dd>
+        </dl>
+      </section>
+
+      <nav aria-label="Guides">
+        <h2>Guides</h2>
+        <ul>
+          <li><a href="/bpmn-symbols/">BPMN symbols — the complete reference</a></li>
+          <li><a href="/bpmn-tutorial/">BPMN tutorial — model your first process</a></li>
+          <li><a href="/bpmn-vs-flowchart/">BPMN vs. flowchart — when notation matters</a></li>
+          <li><a href="/bpmn-examples/">BPMN examples — real process templates</a></li>
+          <li><a href="/how-it-works/">How it works — the local-first architecture</a></li>
+        </ul>
+      </nav>
+    </main>
+
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

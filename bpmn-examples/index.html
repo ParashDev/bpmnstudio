@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>BPMN Examples — Nine Real Process Templates</title>
+    <meta
+      name="description"
+      content="Nine realistic BPMN 2.0 examples explained: approvals, escalation timers, four-eyes review, KYC, claims, incidents, procure-to-pay, fulfillment, refunds."
+    />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://bpmnstudio.dplooy.com/bpmn-examples/" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="BPMN Examples — Nine Real Process Templates" />
+    <meta
+      property="og:description"
+      content="Realistic BPMN 2.0 examples explained, each openable in a free browser editor."
+    />
+    <meta property="og:url" content="https://bpmnstudio.dplooy.com/bpmn-examples/" />
+    <meta property="og:image" content="https://bpmnstudio.dplooy.com/og.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/src/seo/pages.css" />
+  </head>
+  <body>
+    <header class="page-header">
+      <div class="inner">
+        <a class="brand" href="/">
+          <svg width="22" height="22" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="#0d9488"/><circle cx="9" cy="16" r="3.4" fill="none" stroke="#fff" stroke-width="1.8"/><path d="M 12.4 16 L 16.4 16" stroke="#fff" stroke-width="1.8"/><path d="M 21.5 10.8 L 26 16 L 21.5 21.2 L 17 16 Z" fill="none" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"/></svg>
+          BPMN Studio
+        </a>
+        <nav class="page-nav" aria-label="Guides">
+          <a href="/bpmn-symbols/">Symbols</a>
+          <a href="/bpmn-tutorial/">Tutorial</a>
+          <a href="/bpmn-vs-flowchart/">BPMN vs flowchart</a>
+          <a href="/bpmn-examples/" class="active">Examples</a>
+          <a href="/how-it-works/">How it works</a>
+        </nav>
+        <details class="nav-details">
+          <summary class="nav-burger" aria-label="Toggle navigation menu">
+            <svg class="icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+            <svg class="icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+          </summary>
+          <div class="nav-backdrop" aria-hidden="true"></div>
+          <nav class="nav-drawer" aria-label="Guides">
+            <a href="/bpmn-symbols/">Symbols</a>
+            <a href="/bpmn-tutorial/">Tutorial</a>
+            <a href="/bpmn-vs-flowchart/">BPMN vs flowchart</a>
+            <a href="/bpmn-examples/" class="active">Examples</a>
+            <a href="/how-it-works/">How it works</a>
+          </nav>
+        </details>
+        <a class="open-editor" href="/">Open editor</a>
+      </div>
+    </header>
+
+    <main>
+      <p class="eyebrow">Examples</p>
+      <h1>BPMN examples — nine processes you can open and edit</h1>
+      <p class="lede">
+        Each example below ships as a template in the <a href="/">free editor</a>. The "Open in
+        editor" links load the full diagram — editable, validated, and yours to save. Every one
+        demonstrates a pattern you will reuse constantly.
+      </p>
+
+      <h2>1. Approval chain</h2>
+      <p>
+        The backbone of internal operations: a request passes through manager and director review
+        in sequence, each decision modeled as an exclusive gateway with labeled outcomes and a
+        default rejection path. The pattern to steal: both rejection routes converge on a single
+        "send rejection with reason" step, so the exit behavior is defined once instead of being
+        duplicated per stage.
+      </p>
+      <a class="open-tpl" href="/?template=approval">Open in editor</a>
+
+      <h2>2. Exception handling with an escalation timer</h2>
+      <p>
+        A support ticket is handled normally, but an interrupting timer boundary event on the
+        handling task fires after 48 hours without resolution: a supervisor takes over and the
+        customer is notified of the delay. This is the standard BPMN answer to SLA breaches — the
+        escalation is in the model, not in tribal knowledge.
+      </p>
+      <a class="open-tpl" href="/?template=escalation">Open in editor</a>
+
+      <h2>3. Four-eyes review</h2>
+      <p>
+        Two reviewers work between a parallel split and join — neither waits for the other — and
+        an exclusive gateway after the join checks that both approved. A rejection sends the
+        document to rework and back through review. Note what the parallel join guarantees: the
+        decision cannot happen until both reviews exist. Compliance teams call this the
+        four-eyes principle; BPMN makes it structural.
+      </p>
+      <a class="open-tpl" href="/?template=foureyes">Open in editor</a>
+
+      <h2>4. Onboarding / KYC</h2>
+      <p>
+        A customer application crosses two lanes in one pool: the applicant submits documents;
+        compliance verifies identity, runs a risk assessment as a business-rule task, and routes
+        by risk level. Every lane crossing is a handoff — exactly where onboarding stalls in
+        practice — and modeling them makes the stalls visible and countable.
+      </p>
+      <a class="open-tpl" href="/?template=kyc">Open in editor</a>
+
+      <h2>5. Claims intake</h2>
+      <p>
+        An insurance claim is validated for completeness. Incomplete claims trigger a request for
+        missing information, then the process <em>waits</em> — a message catch event — until the
+        claimant responds, and validates again. The loop makes an honest statement most process
+        docs hide: at this point we are blocked on the customer, for as long as it takes.
+      </p>
+      <a class="open-tpl" href="/?template=claims">Open in editor</a>
+
+      <h2>6. Incident escalation</h2>
+      <p>
+        Triage routes by severity: critical incidents go to immediate resolution with a one-hour
+        interrupting timer that hands stalled fixes to a manager; minor ones are logged and
+        scheduled. Three distinct end events — resolved, escalated, scheduled — mean an incident
+        report can say precisely how instances finished.
+      </p>
+      <a class="open-tpl" href="/?template=incident">Open in editor</a>
+
+      <h2>7. Procure-to-pay</h2>
+      <p>
+        The full purchasing cycle: requisition, approval, purchase order, goods receipt, then a
+        message catch event for the supplier invoice, and a three-way-match gateway before
+        payment. Discrepancies route through a resolution task and then to payment. The catch
+        event is the honest part — the process genuinely waits on an external party it does not
+        control.
+      </p>
+      <a class="open-tpl" href="/?template=p2p">Open in editor</a>
+
+      <h2>8. Order fulfillment</h2>
+      <p>
+        An order is checked against stock. In-stock orders fan out into parallel picking and
+        invoicing before shipping; out-of-stock orders trigger a backorder, and the process waits
+        on a message from the supplier before checking stock again. One diagram, both patterns
+        most fulfillment processes need: parallel work and an external-wait loop.
+      </p>
+      <a class="open-tpl" href="/?template=fulfillment">Open in editor</a>
+
+      <h2>9. Refund with response deadline</h2>
+      <p>
+        A refund request is reviewed; approved requests are paid out directly. Borderline cases
+        get an offer of store credit — and then an <em>event-based gateway</em> waits for
+        whichever happens first: the customer accepts, or seven days pass and the case closes as
+        expired. "First of these events wins" is exactly what the event-based gateway exists for;
+        no combination of ordinary gateways can express it.
+      </p>
+      <a class="open-tpl" href="/?template=refund">Open in editor</a>
+
+      <h2>Reading the patterns</h2>
+      <ul>
+        <li><strong>Exclusive gateway + default flow</strong> appears in every example — the discipline that survives contact with reality.</li>
+        <li><strong>Boundary timers</strong> (examples 2 and 6) express deadlines where they apply, not as global footnotes.</li>
+        <li><strong>Message catch events</strong> (examples 5, 7, and 8) mark where the process waits on outsiders.</li>
+        <li><strong>Parallel split/join pairs</strong> (examples 3 and 8) guarantee synchronization structurally.</li>
+        <li><strong>Event-based gateways</strong> (example 9) race an expected reply against a deadline.</li>
+        <li><strong>Lanes</strong> (example 4) turn handoffs into visible, checkable structure.</li>
+      </ul>
+      <p>
+        Symbols unfamiliar? The <a href="/bpmn-symbols/">reference</a> covers all of them. Or
+        start smaller with the <a href="/bpmn-tutorial/">first-process tutorial</a>.
+      </p>
+    </main>
+
+    <footer class="page-footer">
+      <span><a href="/">BPMN Studio</a> — free, local-first, BPMN 2.0. Files never leave your device.</span>
+      <a href="https://www.dplooy.com">Dplooy</a>
+    </footer>
+  </body>
+</html>

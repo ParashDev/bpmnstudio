@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>BPMN Tutorial — Model Your First Process</title>
+    <meta
+      name="description"
+      content="A practical BPMN 2.0 tutorial: model a real approval process step by step in a free browser editor — events, tasks, gateways, and validation."
+    />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://bpmnstudio.dplooy.com/bpmn-tutorial/" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="BPMN Tutorial — Model Your First Process" />
+    <meta
+      property="og:description"
+      content="Model a real approval process step by step in a free browser-based BPMN 2.0 editor."
+    />
+    <meta property="og:url" content="https://bpmnstudio.dplooy.com/bpmn-tutorial/" />
+    <meta property="og:image" content="https://bpmnstudio.dplooy.com/og.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/src/seo/pages.css" />
+  </head>
+  <body>
+    <header class="page-header">
+      <div class="inner">
+        <a class="brand" href="/">
+          <svg width="22" height="22" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="#0d9488"/><circle cx="9" cy="16" r="3.4" fill="none" stroke="#fff" stroke-width="1.8"/><path d="M 12.4 16 L 16.4 16" stroke="#fff" stroke-width="1.8"/><path d="M 21.5 10.8 L 26 16 L 21.5 21.2 L 17 16 Z" fill="none" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"/></svg>
+          BPMN Studio
+        </a>
+        <nav class="page-nav" aria-label="Guides">
+          <a href="/bpmn-symbols/">Symbols</a>
+          <a href="/bpmn-tutorial/" class="active">Tutorial</a>
+          <a href="/bpmn-vs-flowchart/">BPMN vs flowchart</a>
+          <a href="/bpmn-examples/">Examples</a>
+          <a href="/how-it-works/">How it works</a>
+        </nav>
+        <details class="nav-details">
+          <summary class="nav-burger" aria-label="Toggle navigation menu">
+            <svg class="icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+            <svg class="icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+          </summary>
+          <div class="nav-backdrop" aria-hidden="true"></div>
+          <nav class="nav-drawer" aria-label="Guides">
+            <a href="/bpmn-symbols/">Symbols</a>
+            <a href="/bpmn-tutorial/" class="active">Tutorial</a>
+            <a href="/bpmn-vs-flowchart/">BPMN vs flowchart</a>
+            <a href="/bpmn-examples/">Examples</a>
+            <a href="/how-it-works/">How it works</a>
+          </nav>
+        </details>
+        <a class="open-editor" href="/">Open editor</a>
+      </div>
+    </header>
+
+    <main>
+      <p class="eyebrow">Guide</p>
+      <h1>Model your first BPMN process</h1>
+      <p class="lede">
+        In fifteen minutes you'll model a purchase approval process that is correct BPMN 2.0 —
+        the kind of diagram you could hand to a developer or drop into a workflow engine. All you
+        need is the <a href="/">free editor</a>: no install, no account, and the file stays on
+        your machine.
+      </p>
+
+      <h2>The process we'll model</h2>
+      <p>
+        An employee requests a purchase. Small purchases are approved automatically;
+        anything else goes to a manager. Approved requests are ordered; rejected ones are
+        returned with a reason. Plain enough to finish, real enough to matter.
+      </p>
+
+      <h2>Step 1 — start with the trigger</h2>
+      <p>
+        Every process starts because something happened. Open the editor and you'll see a start
+        event (thin circle) already on the canvas. Click it, press <code>E</code> (or double-click),
+        and name it <em>Purchase requested</em>. Naming events after the triggering fact — past
+        tense — is a habit that pays off: readers instantly know what world state kicks things off.
+      </p>
+
+      <h2>Step 2 — add the first task</h2>
+      <p>
+        Click the start event once and use the context menu that appears next to it to append a
+        task. Name it <em>Submit purchase request</em>. Use verb-object names for tasks —
+        <em>Check invoice</em>, <em>Approve request</em> — never vague nouns like
+        <em>Processing</em>. With the task selected, use the wrench icon to change its type to
+        <strong>User task</strong>, since a person does this through a form.
+      </p>
+
+      <h2>Step 3 — the decision</h2>
+      <p>
+        Append a gateway (diamond) after the task and name it <em>Amount?</em>. A gateway's name
+        should be the question being answered; each outgoing path is labeled with an answer.
+        Append a task on one path: <em>Approve automatically</em> (a service task — the system
+        does it). Then draw a second flow from the gateway down to a new user task,
+        <em>Manager reviews request</em>.
+      </p>
+      <ul>
+        <li>Label the first flow <em>Small purchase</em> and give it a condition in the properties panel.</li>
+        <li>Right-click the second flow's source gateway and mark the manager path as the <strong>default flow</strong> — the safety net when no condition matches.</li>
+      </ul>
+      <p>
+        This condition-or-default discipline is exactly what the editor's validation checks. An
+        exclusive gateway with unconditioned paths and no default is the most common defect in
+        real-world BPMN — the diagram looks fine and then nobody can say which path a borderline
+        request takes.
+      </p>
+
+      <h2>Step 4 — the second decision and the ends</h2>
+      <p>
+        After <em>Manager reviews request</em>, add another gateway: <em>Approved?</em>. The
+        <em>Yes</em> path joins the automatic-approval path into a task <em>Place order</em>
+        (service task), then an end event named <em>Purchase ordered</em>. The <em>No</em> path
+        goes to <em>Return request with reason</em> (send task) and its own end event,
+        <em>Request rejected</em>. Distinct end events per outcome make reports and conversations
+        precise: "40% of instances ended in <em>Request rejected</em>" is a sentence a diagram
+        with one generic end can't support.
+      </p>
+
+      <h2>Step 5 — validate, then save</h2>
+      <p>
+        Watch the validation counter in the toolbar as you work. Click it and the editor lists
+        anything structurally wrong — an unconnected element, a missing condition, an unnamed
+        gateway — in plain language, and clicking a finding centers the canvas on the offending
+        element. When it reads clean, press <code>Ctrl+S</code>. The file saves as standard
+        BPMN 2.0 XML on your disk: it will open identically in Camunda Modeler or any compliant
+        tool.
+      </p>
+
+      <h2>Habits worth keeping</h2>
+      <ul>
+        <li>Model left to right; time flows one way.</li>
+        <li>Name every task (verb–object) and every decision gateway (a question).</li>
+        <li>One start per trigger, one end per outcome.</li>
+        <li>Let the happy path run straight; route exceptions downward.</li>
+        <li>Use the <strong>process step list</strong> tool (Tools menu) to turn the finished diagram into numbered steps for a requirements document.</li>
+      </ul>
+
+      <p>
+        Next: browse <a href="/bpmn-examples/">seven real process templates</a> to see these
+        habits applied, or the <a href="/bpmn-symbols/">symbol reference</a> when you meet a shape
+        you don't know. If you're wondering whether BPMN is worth it over a plain flowchart,
+        <a href="/bpmn-vs-flowchart/">that comparison is here</a>.
+      </p>
+    </main>
+
+    <footer class="page-footer">
+      <span><a href="/">BPMN Studio</a> — free, local-first, BPMN 2.0. Files never leave your device.</span>
+      <a href="https://www.dplooy.com">Dplooy</a>
+    </footer>
+  </body>
+</html>
